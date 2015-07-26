@@ -14,7 +14,7 @@ class CarController {
     }
 
     /**
-     * Retrieves a car object with the given id
+     * Retrieves a car object with the given vin
      * @params vin
      */
     def show(){
@@ -41,6 +41,7 @@ class CarController {
     def delete() {
         log.info("in delete")
         Car carObject = Car.get(params?.vin)
+        println carObject.mileage
         if(!carObject) {
             render status: BAD_REQUEST
             return
@@ -93,7 +94,7 @@ class CarController {
 
     private bindCarParams(req){
         Car carRecord = new Car()
-        if (req.id) {
+        if (req.vin) {
             carRecord = Car.get(req.vin)
         }
         bindData(carRecord, req)
@@ -106,7 +107,7 @@ class CarController {
     private def changeCarValue(Car car){
         def value = car.price
         def lastReportedAccident = car.accidentRecords.get(0)
-        switch (lastReportedAccident.accident){
+        switch (lastReportedAccident.accident.type){
             case Accident.MINOR:
                 if(value > 100){
                     value = value - 100/*(Accident.findByType(Accident.MINOR))*/

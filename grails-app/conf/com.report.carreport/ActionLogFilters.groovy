@@ -1,7 +1,10 @@
 package com.report.carreport
 
+/**
+ * Created by rahulpratik on 7/25/2015.
+ */
 class ActionLogFilters {
-    def errorLogService //platform-core event is not injected in filters, so injecting the service directly
+    def errorLogService
 
     def filters = {
         apiURIs(uri: '/api/**') {
