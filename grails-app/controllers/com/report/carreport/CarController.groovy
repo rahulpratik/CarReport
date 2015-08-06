@@ -41,7 +41,6 @@ class CarController {
     def delete() {
         log.info("in delete")
         Car carObject = Car.get(params?.vin)
-        println carObject.mileage
         if(!carObject) {
             render status: BAD_REQUEST
             return
