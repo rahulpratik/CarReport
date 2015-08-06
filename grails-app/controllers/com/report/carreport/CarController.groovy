@@ -115,7 +115,7 @@ class CarController {
                 }
                 break
             case Accident.MAJOR:
-                if(value > 100){
+                if(value > 200){
                     value = value - 200
                 }else{
                     value = 0
